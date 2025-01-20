@@ -55,7 +55,9 @@ class _ReadScreenState extends State<ReadScreen> {
   /// 👩‍💻 게시글 조회 요청
   ///
   Future<Board> getBoard(int no) async {
-    var url = "http://10.0.2.2:8080/board/$no";
+//    var url = "http://10.0.2.2:8080/board/$no";
+    var url = "http://localhost:8080/board/read/$no";
+
     try {
       var response = await http.get(Uri.parse(url));
       print("::::: response - body :::::");
@@ -79,7 +81,9 @@ class _ReadScreenState extends State<ReadScreen> {
 
   /// 게시글 삭제 요청
   Future<bool> deleteBoard(int no) async {
-    var url = "http://10.0.2.2:8080/board/$no";
+//    var url = "http://10.0.2.2:8080/board/$no";
+    var url = "http://localhost:8080/board/$no";
+
     try {
       var response = await http.delete(Uri.parse(url));
       print("::::: response - statusCode :::::");
@@ -91,6 +95,7 @@ class _ReadScreenState extends State<ReadScreen> {
         return true;
       } else {
         // 실패 시 오류 메시지
+        print("삭제 실패");
         throw Exception(
             'Failed to delete board. Status code: ${response.statusCode}');
       }
